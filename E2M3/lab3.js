@@ -6,6 +6,7 @@ const Row = document.getElementById('flBtn');
 const Submit = document.getElementById('BtnSb');
 const Name = document.getElementById('InputName');
 const EMAIL = document.getElementById('InputEMAIL');
+const Radio = document.getElementsByClassName('form-check-input');
 Dialog.addEventListener('click', NoUp);
 Button.addEventListener('click', ShowModal);
 CloseButton.addEventListener('click', CloseModal);
@@ -13,6 +14,11 @@ Background.addEventListener('click', CloseModal);
 Submit.addEventListener('click', BlockSubmit);
 Name.addEventListener('blur', NameValidate);
 EMAIL.addEventListener('blur', EmailValidation);
+for(let i = 0; i < Radio.length; i++)
+{
+    Radio[i].addEventListener('click', NewRadio);
+}
+//Radio.addEventListener('click', ()=>{console.log('dgddd')});
 
 //Dialog.style.opacity = '0';
 //Dialog.style.visibility = 'hidden';
@@ -69,31 +75,39 @@ function NoUp(Event)
 function BlockSubmit(Event)
 {
     Event.preventDefault();
+    if(!NameValidate() || !EmailValidation())
+    {
+        return;
+    }
+    if(document.getElementById('Radio4').checked == false)
+    {
+        alert('Неправильный выбор');
+        return;
+    }
     console.table(document.getElementById('SUBMITION'));
+    CloseModal();
     Event.stopPropagation();
 }
 
-function NameValidate(Event)
+function NameValidate()
 {
-//    Event.preventDefault();
     let st = Name.value;
-
-    Name.setCustomValidity('detbtbf');
-    //console.log(st);    
+    Name.setCustomValidity('Сам дурак');
     if(st == '')
-        alert('Error');
-    Name.focus();
-//    Event.preventDefault();
-//    Event.stopPropagation();
+    {
+        alert('Неправильное имя');
+        Name.style.background = 'red';
+        return false;
+    }
+    return true;
 }
 
-function EmailValidation(Event)
+function EmailValidation()
 {
-    Event.preventDefault();
     let st = EMAIL.value;
     let flag = 0;
     let i = 0;
-    for(i; i < length(st); i++)
+    for(i; i < st.length; i++)
     {
         if(st[i] == '@')
         {
@@ -101,7 +115,7 @@ function EmailValidation(Event)
             break;
         }
     }    
-    for(i; i < length(st); i++)
+    for(i; i < st.length; i++)
     {
         if(st[i] == '.')
         {
@@ -111,7 +125,19 @@ function EmailValidation(Event)
     }
     if(flag != 2)
     {
-        alert('Error');
+        alert('Неправильное мыло');
+        EMAIL.style.background = 'red';
+        return false;
     }
-    Event.stopPropagation();
+    return true;
+}
+
+function NewRadio()
+{
+    console.log('aaaaaaaaaaaaaaa');
+    for(let i = 0; i < Radio.length; i++)
+    {
+        Radio[i].checked = false;
+    }
+    this.checked = true;
 }
