@@ -84,9 +84,27 @@ function BlockSubmit(Event)
         alert('Неправильный выбор');
         return;
     }
-    console.table(document.getElementById('SUBMITION'));
+    //console.table(document.getElementById('SUBMITION'));
+    Parsing();
     CloseModal();
     Event.stopPropagation();
+}
+
+function Parsing()
+{
+    let Sobj = {
+        name: "",
+        mail: "",
+        value: -1
+    };
+    Sobj.name = Name.value;
+    Sobj.mail = EMAIL.value;
+    for(let i = 0; i < Radio.length; i++)
+    {
+        if(Radio[i].checked)
+        Sobj.value = i;
+    }
+    console.table(Sobj);
 }
 
 function NameValidate()
@@ -99,6 +117,7 @@ function NameValidate()
         Name.style.background = 'red';
         return false;
     }
+    Name.style.background = 'white';
     return true;
 }
 
@@ -129,6 +148,7 @@ function EmailValidation()
         EMAIL.style.background = 'red';
         return false;
     }
+    EMAIL.style.background = 'white';
     return true;
 }
 
