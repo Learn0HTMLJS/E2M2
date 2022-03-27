@@ -1,5 +1,5 @@
 # Схема #
-![picture](scheme.svg)
+![picture](scheme.png)
 # Интерфейс #
 ![picture](Group16.svg)
 ![picture](Group17.svg)
