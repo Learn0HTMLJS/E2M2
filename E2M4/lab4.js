@@ -12,7 +12,7 @@ function Connect()
 {  
     let text = JSON.parse(mein)[0]['quote'];
     let P = document.createElement('p');
-    P.innerHTML = '<p>' + text + '<p/>';
+    P.innerHTML =  text ;
     document.body.append(P);
     Button.removeEventListener('click', Connect);
 }
